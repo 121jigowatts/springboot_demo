@@ -2,26 +2,65 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<link rel="stylesheet" media="all" th:href="@{/css/style.css}"/>
+<title>User</title>
 </head>
 <body>
 	<h1>Home Page</h1>
-	<form method="post" action="/" th:object="${formModel}">
-	<table>
-		<tr>
-			<td>
-				<label for="name">Name</label>
-			</td>
-			<td>
-				<input type="text" name="name" th:value="*{name}" />
-			</td>
-		</tr>
-	</table>
-	<input type="submit" />
-	</form>
-
-	
+	<div class="content1">
+		<form method="post" action="/" th:object="${formModel}">
+		<table>
+			<tr>
+				<td>
+					<label for="name">NAME</label>
+				</td>
+				<td>
+					<input type="text" name="name" th:value="${name}" />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label for="name">MAIL</label>
+				</td>
+				<td>
+					<input type="text" name="mail" th:value="*{mail}" />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label for="age">AGE</label>
+				</td>
+				<td>
+					<input type="text" name="age" th:value="*{age}" />
+				</td>		
+			</tr>
+			
+		</table>
+		<input type="submit" value="Submit">
+		</form>	
+	</div>
+	<div>
+		<table>
+			<tr>
+				<th>ID</th>
+				<th>NAME</th>
+				<th>MAIL</th>
+				<th>AGE</th>
+			</tr>
+			<tr th:each="user : ${users}">
+				<td th:text="${user.id}"></td>
+				<td th:text="${user.name}"></td>
+				<td th:text="${user.mail}"></td>
+				<td th:text="${user.age}"></td>
+			</tr>
+		</table>	
+	</div>
 	
 	<pre th:text="${users}"></pre>
+
+	<footer>
+		<hr />
+		<label class="postedby">Posted by 1.21jigowatts</label>
+	</footer>
 </body>
 </html>

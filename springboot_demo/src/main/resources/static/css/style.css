@@ -1,0 +1,28 @@
+@charset "UTF-8";
+
+html {
+	margin-left: 5%;
+	margin-right: 5%;
+}
+
+body {
+	color: gray;
+	background: #292929
+}
+
+th {
+	color: #292929;
+	background: #f0f0f0;
+}
+
+td {
+	color: gray;
+}
+
+.content1 {
+	margin-bottom: 20px;
+}
+
+.postedby {
+	font-size: xx-small;
+}
