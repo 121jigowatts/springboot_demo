@@ -36,12 +36,14 @@
         <th>NAME</th>
         <th>MAIL</th>
         <th>AGE</th>
+        <th></th>
       </tr>
       <tr th:each="user : ${users}">
         <td th:text="${user.id}"></td>
         <td th:text="${user.name}"></td>
         <td th:text="${user.mail}"></td>
         <td th:text="${user.age}"></td>
+        <td><a th:href="@{'/edit/' + ${user.id}}">edit</a></td>
       </tr>
     </table>
   </div>
