@@ -7,22 +7,28 @@
 </head>
 <body>
   <h1>Home Page</h1>
+  <p th:text="${message}"></p>
+
   <div class="content1">
     <form method="post" action="/" th:object="${formModel}">
+      <ul>
+        <li th:each="error : ${#fields.detailedErrors()}" class="error"
+          th:text="${error.message}" />
+      </ul>
       <table>
         <tr>
           <td><label for="name">NAME</label></td>
-          <td><input type="text" name="name" th:value="${name}" />
+          <td><input type="text" name="name" th:field="*{name}" />
           </td>
         </tr>
         <tr>
           <td><label for="name">MAIL</label></td>
-          <td><input type="text" name="mail" th:value="*{mail}" />
+          <td><input type="text" name="mail" th:field="*{mail}" />
           </td>
         </tr>
         <tr>
           <td><label for="age">AGE</label></td>
-          <td><input type="text" name="age" th:value="*{age}" /></td>
+          <td><input type="text" name="age" th:field="*{age}" /></td>
         </tr>
 
       </table>
@@ -43,7 +49,8 @@
         <td th:text="${user.name}"></td>
         <td th:text="${user.mail}"></td>
         <td th:text="${user.age}"></td>
-        <td><a th:href="@{'/edit/' + ${user.id}}">edit</a></td>
+        <td><a th:href="@{'/edit/' + ${user.id}}">edit</a> <span>|</span>
+          <a th:href="@{'/delete/' + ${user.id}}">delete</a></td>
       </tr>
     </table>
   </div>

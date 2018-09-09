@@ -8,10 +8,13 @@ import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.springboot_demo.repositories.UserRepository;
@@ -24,17 +27,29 @@ public class HelloController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView index(@ModelAttribute("formModel") User userEntity, ModelAndView model) {
 		model.setViewName("index");
-		model.addObject("message", "Hello World!");
+		model.addObject("message","User List");
 		Iterable<User> list = repository.findAll();
+		model.addObject("formModel", userEntity);
 		model.addObject("users", list);
 		return model;
 	}
 
 	@RequestMapping(value = "/", method = RequestMethod.POST)
 	@Transactional(readOnly = false)
-	public ModelAndView form(@ModelAttribute("formModel") User userEntity, ModelAndView model) {
-		repository.saveAndFlush(userEntity);
-		return new ModelAndView("redirect:/");
+	public ModelAndView form(@ModelAttribute("formModel") @Validated User userEntity, BindingResult result,
+			ModelAndView model) {
+		ModelAndView res = null;
+		if (!result.hasErrors()) {
+			repository.saveAndFlush(userEntity);
+			res = new ModelAndView("redirect:/");
+		} else {
+			model.setViewName("index");
+			model.addObject("message", "Error is occured...");
+			Iterable<User> users = repository.findAll();
+			model.addObject("users", users);
+			res = model;
+		}
+		return res;
 	}
 
 	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
@@ -49,6 +64,21 @@ public class HelloController {
 	@Transactional(readOnly = false)
 	public ModelAndView update(@ModelAttribute User userEntity, ModelAndView model) {
 		repository.saveAndFlush(userEntity);
+		return new ModelAndView("redirect:/");
+	}
+
+	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+	public ModelAndView delete(@PathVariable int id, ModelAndView model) {
+		model.setViewName("delete");
+		Optional<User> user = repository.findById((long) id);
+		model.addObject("formModel", user.get());
+		return model;
+	}
+
+	@RequestMapping(value = "/delete", method = RequestMethod.POST)
+	@Transactional(readOnly = false)
+	public ModelAndView remove(@RequestParam long id, ModelAndView model) {
+		repository.deleteById(id);
 		return new ModelAndView("redirect:/");
 	}
 
