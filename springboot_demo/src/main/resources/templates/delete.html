@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charsert=UTF-8" />
+<link rel="stylesheet" media="all" th:href="@{/css/style.css}" />
+<title>delete</title>
+</head>
+<body>
+  <h1>Delete Page</h1>
+  <div class="content1">
+    <form method="post" action="/delete" th:object="${formModel}">
+      <input type="hidden" name="id" th:value="*{id}" />
+      <table>
+        <tr>
+          <td>NAME:</td>
+          <td th:text="*{name}"></td>
+        </tr>
+        <tr>
+          <td>MAIL:</td>
+          <td th:text="*{mail}"></td>
+        </tr>
+        <tr>
+          <td>AGE:</td>
+          <td th:text="*{age}"></td>
+        </tr>
+      </table>
+      <input type="submit" value="submit" />
+
+    </form>
+  </div>
+  <div>
+    <a href="/">back</a>
+  </div>
+  <pre th:text="${formModel}"></pre>
+
+  <footer>
+    <hr />
+    <label class="postedby">Posted by 1.21jigowatts</label>
+  </footer>
+</body>
+</html>

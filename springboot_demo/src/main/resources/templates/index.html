@@ -2,65 +2,64 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" media="all" th:href="@{/css/style.css}"/>
+<link rel="stylesheet" media="all" th:href="@{/css/style.css}" />
 <title>User</title>
 </head>
 <body>
-	<h1>Home Page</h1>
-	<div class="content1">
-		<form method="post" action="/" th:object="${formModel}">
-		<table>
-			<tr>
-				<td>
-					<label for="name">NAME</label>
-				</td>
-				<td>
-					<input type="text" name="name" th:value="${name}" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<label for="name">MAIL</label>
-				</td>
-				<td>
-					<input type="text" name="mail" th:value="*{mail}" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<label for="age">AGE</label>
-				</td>
-				<td>
-					<input type="text" name="age" th:value="*{age}" />
-				</td>		
-			</tr>
-			
-		</table>
-		<input type="submit" value="Submit">
-		</form>	
-	</div>
-	<div>
-		<table>
-			<tr>
-				<th>ID</th>
-				<th>NAME</th>
-				<th>MAIL</th>
-				<th>AGE</th>
-			</tr>
-			<tr th:each="user : ${users}">
-				<td th:text="${user.id}"></td>
-				<td th:text="${user.name}"></td>
-				<td th:text="${user.mail}"></td>
-				<td th:text="${user.age}"></td>
-			</tr>
-		</table>	
-	</div>
-	
-	<pre th:text="${users}"></pre>
+  <h1>Home Page</h1>
+  <p th:text="${message}"></p>
 
-	<footer>
-		<hr />
-		<label class="postedby">Posted by 1.21jigowatts</label>
-	</footer>
+  <div class="content1">
+    <form method="post" action="/" th:object="${formModel}">
+      <ul>
+        <li th:each="error : ${#fields.detailedErrors()}" class="error"
+          th:text="${error.message}" />
+      </ul>
+      <table>
+        <tr>
+          <td><label for="name">NAME</label></td>
+          <td><input type="text" name="name" th:field="*{name}" />
+          </td>
+        </tr>
+        <tr>
+          <td><label for="name">MAIL</label></td>
+          <td><input type="text" name="mail" th:field="*{mail}" />
+          </td>
+        </tr>
+        <tr>
+          <td><label for="age">AGE</label></td>
+          <td><input type="text" name="age" th:field="*{age}" /></td>
+        </tr>
+
+      </table>
+      <input type="submit" value="Submit">
+    </form>
+  </div>
+  <div>
+    <table>
+      <tr>
+        <th>ID</th>
+        <th>NAME</th>
+        <th>MAIL</th>
+        <th>AGE</th>
+        <th></th>
+      </tr>
+      <tr th:each="user : ${users}">
+        <td th:text="${user.id}"></td>
+        <td th:text="${user.name}"></td>
+        <td th:text="${user.mail}"></td>
+        <td th:text="${user.age}"></td>
+        <td><a th:href="@{'/edit/' + ${user.id}}">edit</a> <span>|</span>
+          <a th:href="@{'/delete/' + ${user.id}}">delete</a></td>
+      </tr>
+    </table>
+  </div>
+
+  <pre th:text="${users}"></pre>
+
+  <footer>
+    <hr />
+    <label class="postedby">Posted by 1.21jigowatts</label>
+  </footer>
 </body>
 </html>

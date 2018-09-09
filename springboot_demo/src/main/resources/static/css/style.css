@@ -19,6 +19,10 @@ td {
 	color: gray;
 }
 
+.error {
+	color: red;
+}
+
 .content1 {
 	margin-bottom: 20px;
 }
