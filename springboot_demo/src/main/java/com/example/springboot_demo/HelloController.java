@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Optional;
 
 import javax.annotation.PostConstruct;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,14 +25,18 @@ import com.example.springboot_demo.repositories.UserRepository;
 public class HelloController {
 	@Autowired
 	UserRepository repository;
+	
+	@PersistenceContext
+	EntityManager entityManager;
 
+	UserDaoImpl dao;
+	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public ModelAndView index(@ModelAttribute("formModel") User userEntity, ModelAndView model) {
+	public ModelAndView index(ModelAndView model) {
 		model.setViewName("index");
 		model.addObject("message","User List");
-		Iterable<User> list = repository.findAll();
-		model.addObject("formModel", userEntity);
-		model.addObject("users", list);
+		Iterable<User> users = dao.getAll();
+		model.addObject("users", users);
 		return model;
 	}
 
@@ -84,6 +90,8 @@ public class HelloController {
 
 	@PostConstruct
 	public void initalData() {
+		dao = new UserDaoImpl(entityManager);
+		
 		ArrayList<User> data = new ArrayList<User>();
 		data.add(new User("Alice", "Alice@example.com", 16));
 		data.add(new User("Emma", "Emma@example.com", 19));
