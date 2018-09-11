@@ -38,4 +38,23 @@ public class UserDaoImpl implements UserDao<User> {
 	public List<User> findByName(String name) {
 		return (List<User>) entityManager.createQuery("from User where name = " + name).getResultList();
 	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<User> search(String cstr) {
+		List<User> users = null;
+		Query query = entityManager.createNamedQuery("findByName").setParameter("cname", "%" + cstr + "%");
+		users = query.getResultList();
+		return users;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<User> findByAge(int min, int max) {
+		List<User> users = null;
+		Query query = entityManager.createNamedQuery("findByAge").setParameter("min", min).setParameter("max", max);
+		users = query.getResultList();
+		return users;
+	}
+
 }

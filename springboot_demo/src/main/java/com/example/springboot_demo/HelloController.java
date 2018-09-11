@@ -1,6 +1,7 @@
 package com.example.springboot_demo;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import javax.annotation.PostConstruct;
@@ -25,17 +26,17 @@ import com.example.springboot_demo.repositories.UserRepository;
 public class HelloController {
 	@Autowired
 	UserRepository repository;
-	
+
 	@PersistenceContext
 	EntityManager entityManager;
 
 	UserDaoImpl dao;
-	
+
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView index(ModelAndView model) {
 		model.setViewName("index");
-		model.addObject("message","User List");
-		Iterable<User> users = dao.getAll();
+		model.addObject("message", "User List");
+		List<User> users = repository.findByAge(15, 18);
 		model.addObject("users", users);
 		return model;
 	}
@@ -56,6 +57,28 @@ public class HelloController {
 			res = model;
 		}
 		return res;
+	}
+
+	@RequestMapping(value = "/search", method = RequestMethod.GET)
+	public ModelAndView search(ModelAndView model) {
+		model.setViewName("search");
+		model.addObject("value", "");
+		Iterable<User> users = dao.findByAge(15, 18);
+		model.addObject("users", users);
+		return model;
+	}
+
+	@RequestMapping(value = "/search", method = RequestMethod.POST)
+	public ModelAndView select(@RequestParam String cstr, ModelAndView model) {
+		model.setViewName("search");
+		if (cstr == "") {
+			model = new ModelAndView("redirect:/search");
+		} else {
+			model.addObject("value", cstr);
+			List<User> users = dao.search(cstr);
+			model.addObject("users", users);
+		}
+		return model;
 	}
 
 	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
@@ -91,7 +114,7 @@ public class HelloController {
 	@PostConstruct
 	public void initalData() {
 		dao = new UserDaoImpl(entityManager);
-		
+
 		ArrayList<User> data = new ArrayList<User>();
 		data.add(new User("Alice", "Alice@example.com", 16));
 		data.add(new User("Emma", "Emma@example.com", 19));
