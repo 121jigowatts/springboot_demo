@@ -43,16 +43,16 @@ public class UserDaoImpl implements UserDao<User> {
 	@Override
 	public List<User> search(String cstr) {
 		List<User> users = null;
-		String queryString = "from User where id = :cstr or name like :cname or mail like :cmail";
-		Long id = 0L;
-		try {
-			id = Long.parseLong(cstr);
-		} catch (NumberFormatException e) {
-			e.printStackTrace();
-		}
+		Query query = entityManager.createNamedQuery("findByName").setParameter("cname", "%" + cstr + "%");
+		users = query.getResultList();
+		return users;
+	}
 
-		Query query = entityManager.createQuery(queryString).setParameter("cstr", id)
-				.setParameter("cname", "%" + cstr + "%").setParameter("cmail", cstr + "@%");
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<User> findByAge(int min, int max) {
+		List<User> users = null;
+		Query query = entityManager.createNamedQuery("findByAge").setParameter("min", min).setParameter("max", max);
 		users = query.getResultList();
 		return users;
 	}

@@ -63,7 +63,7 @@ public class HelloController {
 	public ModelAndView search(ModelAndView model) {
 		model.setViewName("search");
 		model.addObject("value", "");
-		Iterable<User> users = dao.getAll();
+		Iterable<User> users = dao.findByAge(15, 18);
 		model.addObject("users", users);
 		return model;
 	}
