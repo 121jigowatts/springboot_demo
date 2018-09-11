@@ -4,6 +4,9 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
 public class UserDaoImpl implements UserDao<User> {
 	private static final long serialVersionUID = 1L;
@@ -20,11 +23,17 @@ public class UserDaoImpl implements UserDao<User> {
 
 	@Override
 	public List<User> getAll() {
-		Query query = entityManager.createQuery("from User");
-		@SuppressWarnings("unchecked")
-		List<User> users = query.getResultList();
-		entityManager.close();
+		int offset = 1;
+		int limit = 2;
 
+		List<User> users = null;
+		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+		CriteriaQuery<User> query = builder.createQuery(User.class);
+		Root<User> root = query.from(User.class);
+		query.select(root).orderBy(builder.asc(root.get("name")));
+
+		users = (List<User>) entityManager.createQuery(query).setFirstResult(offset).setMaxResults(limit)
+				.getResultList();
 		return users;
 	}
 
@@ -39,12 +48,16 @@ public class UserDaoImpl implements UserDao<User> {
 		return (List<User>) entityManager.createQuery("from User where name = " + name).getResultList();
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<User> search(String cstr) {
 		List<User> users = null;
-		Query query = entityManager.createNamedQuery("findByName").setParameter("cname", "%" + cstr + "%");
-		users = query.getResultList();
+
+		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+		CriteriaQuery<User> query = builder.createQuery(User.class);
+		Root<User> root = query.from(User.class);
+		query.select(root).where(builder.equal(root.get("name"), cstr));
+
+		users = (List<User>) entityManager.createQuery(query).getResultList();
 		return users;
 	}
 

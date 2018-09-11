@@ -36,7 +36,7 @@ public class HelloController {
 	public ModelAndView index(ModelAndView model) {
 		model.setViewName("index");
 		model.addObject("message", "User List");
-		List<User> users = repository.findByAge(15, 18);
+		List<User> users = repository.findAll();
 		model.addObject("users", users);
 		return model;
 	}
@@ -63,7 +63,7 @@ public class HelloController {
 	public ModelAndView search(ModelAndView model) {
 		model.setViewName("search");
 		model.addObject("value", "");
-		Iterable<User> users = dao.findByAge(15, 18);
+		Iterable<User> users = dao.getAll();
 		model.addObject("users", users);
 		return model;
 	}
