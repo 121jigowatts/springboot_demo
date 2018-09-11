@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF8" />
+<link rel="stylesheet" media="all" th:href="@{/css/style.css}" />
+<title>search</title>
+</head>
+<body>
+  <h1>Search Page</h1>
+  <div class="content1">
+    <form action="/search" method="post">
+      <p>search criteria</p>
+      <div>
+        <input type="text" name="cstr" size="20" th:value="${value}" />
+      </div>
+      <input type="submit" value="search" />
+    </form>
+  </div>
+
+  <table>
+    <tr>
+      <th>ID</th>
+      <th>NAME</th>
+      <th>MAIL</th>
+      <th>AGE</th>
+    </tr>
+    <tr th:each="user : ${users}">
+      <td th:text="${user.id}"></td>
+      <td th:text="${user.name}"></td>
+      <td th:text="${user.mail}"></td>
+      <td th:text="${user.age}"></td>
+    </tr>
+  </table>
+</body>
+</html>

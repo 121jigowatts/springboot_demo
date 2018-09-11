@@ -38,4 +38,23 @@ public class UserDaoImpl implements UserDao<User> {
 	public List<User> findByName(String name) {
 		return (List<User>) entityManager.createQuery("from User where name = " + name).getResultList();
 	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<User> search(String cstr) {
+		List<User> users = null;
+		String queryString = "from User where id = :cstr or name like :cname or mail like :cmail";
+		Long id = 0L;
+		try {
+			id = Long.parseLong(cstr);
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		}
+
+		Query query = entityManager.createQuery(queryString).setParameter("cstr", id)
+				.setParameter("cname", "%" + cstr + "%").setParameter("cmail", cstr + "@%");
+		users = query.getResultList();
+		return users;
+	}
+
 }
