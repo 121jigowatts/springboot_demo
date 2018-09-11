@@ -36,7 +36,7 @@ public class HelloController {
 	public ModelAndView index(ModelAndView model) {
 		model.setViewName("index");
 		model.addObject("message", "User List");
-		Iterable<User> users = dao.getAll();
+		List<User> users = repository.findByAge(15, 18);
 		model.addObject("users", users);
 		return model;
 	}
