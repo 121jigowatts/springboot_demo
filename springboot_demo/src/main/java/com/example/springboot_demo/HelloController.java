@@ -5,9 +5,6 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.annotation.PostConstruct;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,16 +24,14 @@ public class HelloController {
 	@Autowired
 	UserRepository repository;
 
-	@PersistenceContext
-	EntityManager entityManager;
-
-	UserDaoImpl dao;
+	@Autowired
+	private UserService service; 
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView index(ModelAndView model) {
 		model.setViewName("index");
 		model.addObject("message", "User List");
-		List<User> users = repository.findByAge(15, 18);
+		List<User> users = service.getAll();
 		model.addObject("users", users);
 		return model;
 	}
@@ -63,7 +58,7 @@ public class HelloController {
 	public ModelAndView search(ModelAndView model) {
 		model.setViewName("search");
 		model.addObject("value", "");
-		Iterable<User> users = dao.findByAge(15, 18);
+		Iterable<User> users = service.getAll();
 		model.addObject("users", users);
 		return model;
 	}
@@ -75,7 +70,7 @@ public class HelloController {
 			model = new ModelAndView("redirect:/search");
 		} else {
 			model.addObject("value", cstr);
-			List<User> users = dao.search(cstr);
+			List<User> users = service.search(cstr);
 			model.addObject("users", users);
 		}
 		return model;
@@ -113,8 +108,6 @@ public class HelloController {
 
 	@PostConstruct
 	public void initalData() {
-		dao = new UserDaoImpl(entityManager);
-
 		ArrayList<User> data = new ArrayList<User>();
 		data.add(new User("Alice", "Alice@example.com", 16));
 		data.add(new User("Emma", "Emma@example.com", 19));

@@ -16,20 +16,31 @@
       <input type="submit" value="search" />
     </form>
   </div>
+  <div>
+    <table>
+      <tr>
+        <th>ID</th>
+        <th>NAME</th>
+        <th>MAIL</th>
+        <th>AGE</th>
+      </tr>
+      <tr th:each="user : ${users}">
+        <td th:text="${user.id}"></td>
+        <td th:text="${user.name}"></td>
+        <td th:text="${user.mail}"></td>
+        <td th:text="${user.age}"></td>
+      </tr>
+    </table>
+  </div>
 
-  <table>
-    <tr>
-      <th>ID</th>
-      <th>NAME</th>
-      <th>MAIL</th>
-      <th>AGE</th>
-    </tr>
-    <tr th:each="user : ${users}">
-      <td th:text="${user.id}"></td>
-      <td th:text="${user.name}"></td>
-      <td th:text="${user.mail}"></td>
-      <td th:text="${user.age}"></td>
-    </tr>
-  </table>
+  <div>
+    <a href="/">back</a>
+  </div>
+  <pre th:text="${users}"></pre>
+
+  <footer>
+    <hr />
+    <label class="postedby">Posted by 1.21jigowatts</label>
+  </footer>
 </body>
 </html>
