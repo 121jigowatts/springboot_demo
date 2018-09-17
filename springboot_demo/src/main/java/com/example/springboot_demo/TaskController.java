@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ public class TaskController {
 	@Autowired
 	TaskRepository repository;
 
+	@PersistenceContext
 	EntityManager entityManager;
 
 	TaskDaoImpl dao;

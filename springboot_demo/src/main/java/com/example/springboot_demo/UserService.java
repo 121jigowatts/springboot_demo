@@ -24,13 +24,13 @@ public class UserService {
 		return (User) entityManager.createQuery("from User where id = " + num).getSingleResult();
 	}
 
-	public List<User> search(String cstr){
+	public List<User> search(String cstr) {
 		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
 		CriteriaQuery<User> query = builder.createQuery(User.class);
 		Root<User> root = query.from(User.class);
 		query.select(root).where(builder.equal(root.get("name"), cstr));
 		List<User> users = null;
-		users = (List<User>)entityManager.createQuery(query).getResultList();
+		users = (List<User>) entityManager.createQuery(query).getResultList();
 		return users;
 	}
 }
