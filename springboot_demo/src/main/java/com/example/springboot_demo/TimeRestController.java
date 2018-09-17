@@ -8,11 +8,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class TimeRestController {
 
 	@Autowired
-	SimpleComponent component;
+	SimpleBean simpleBean;
 	
 	@RequestMapping("/now")
 	public String datetime() {
-		return component.now();
+		return simpleBean.now();
 	}
 	
 }
