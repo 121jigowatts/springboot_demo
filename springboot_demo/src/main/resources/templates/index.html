@@ -29,6 +29,11 @@
           <a th:href="@{'/delete/' + ${user.id}}">delete</a></td>
       </tr>
     </table>
+    <div>
+      <a page:href="${users.getNumber() - 1}">&lt;&lt;preview</a>
+       | 
+      <a page:href="${users.getNumber() + 1}">next&gt;&gt;</a>
+    </div>
   </div>
 
   <pre th:text="${users}"></pre>
