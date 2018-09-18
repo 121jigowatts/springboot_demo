@@ -3,21 +3,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" media="all" th:href="@{/css/style.css}" />
-<script
-  src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script th:inline="javascript">
-$(function(){
-    var num = /*[[${param.id[0]}]]*/;
-    $.get("/users/" + num,null,callback);	
-});
-
-function callback(result){
-	$('#user').append('<li>ID: ' + result.id + '</li>');
-	$('#user').append('<li>NAME: ' + result.name + '</li>');
-	$('#user').append('<li>MAIL: ' + result.mail + '</li>');
-	$('#user').append('<li>AGE: ' + result.age + '</li>');
-}
-</script>
 <title>User</title>
 </head>
 <body>
@@ -25,9 +10,6 @@ function callback(result){
   <p th:text="${message}"></p>
   <div>
     <a href="/search">search</a>
-  </div>
-  <div>
-    <ol id="user"></ol>
   </div>
   <div>
     <table>
