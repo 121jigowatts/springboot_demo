@@ -6,6 +6,8 @@ import java.util.Optional;
 
 import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
@@ -25,7 +27,7 @@ public class HelloController {
 	UserRepository repository;
 
 	@Autowired
-	private UserService service; 
+	private UserService service;
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView index(ModelAndView model) {
@@ -52,6 +54,14 @@ public class HelloController {
 			res = model;
 		}
 		return res;
+	}
+
+	@RequestMapping(value = "/page", method = RequestMethod.GET)
+	public ModelAndView index(ModelAndView model, Pageable pageable) {
+		model.setViewName("index");
+		Page<User> users = repository.findAll(pageable);
+		model.addObject("users", users);
+		return model;
 	}
 
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
