@@ -8,19 +8,21 @@ public class Message {
 	@Id
 	private String id;
 
-	private String message;
+	private String text;
 	private Date date;
 
-	public Message(String message) {
-		this.message = message;
+	public Message(String text) {
+		super();
+		this.text = text;
+		this.date = new Date();
 	}
 
 	public String getId() {
 		return this.id;
 	}
 
-	public String getMessage() {
-		return this.message;
+	public String getText() {
+		return this.text;
 	}
 
 	public Date getDate() {

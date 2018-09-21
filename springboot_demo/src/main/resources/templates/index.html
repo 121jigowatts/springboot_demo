@@ -9,34 +9,23 @@
   <h1>Home Page</h1>
   <p th:text="${message}"></p>
   <div>
-    <a href="/search">search</a>
+    <form method="post" action="/">
+      <textarea name="text" rows="1"></textarea>
+      <input type="submit" />
+    </form>
   </div>
   <div>
     <table>
       <tr>
-        <th>ID</th>
-        <th>NAME</th>
-        <th>MAIL</th>
-        <th>AGE</th>
-        <th></th>
+        <th>TEXT</th>
+        <th>DATE</th>
       </tr>
-      <tr th:each="user : ${users}">
-        <td th:text="${user.id}"></td>
-        <td th:text="${user.name}"></td>
-        <td th:text="${user.mail}"></td>
-        <td th:text="${user.age}"></td>
-        <td><a th:href="@{'/edit/' + ${user.id}}">edit</a> <span>|</span>
-          <a th:href="@{'/delete/' + ${user.id}}">delete</a></td>
+      <tr th:each="mes : ${messages}">
+        <td th:text="${mes.text}"></td>
+        <td th:text="${mes.date}"></td>
       </tr>
     </table>
-    <div>
-      <a page:href="${users.getNumber() - 1}">&lt;&lt;preview</a>
-       | 
-      <a page:href="${users.getNumber() + 1}">next&gt;&gt;</a>
-    </div>
   </div>
-
-  <pre th:text="${users}"></pre>
 
   <footer>
     <hr />
