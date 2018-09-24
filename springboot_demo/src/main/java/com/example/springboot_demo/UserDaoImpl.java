@@ -8,6 +8,8 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
+import com.example.springboot_demo.domain.User;
+
 public class UserDaoImpl implements UserDao<User> {
 	private static final long serialVersionUID = 1L;
 	private EntityManager entityManager;

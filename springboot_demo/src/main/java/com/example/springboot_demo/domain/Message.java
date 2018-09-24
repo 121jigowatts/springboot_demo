@@ -1,4 +1,4 @@
-package com.example.springboot_demo;
+package com.example.springboot_demo.domain;
 
 import java.util.Date;
 

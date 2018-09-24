@@ -1,4 +1,4 @@
-package com.example.springboot_demo;
+package com.example.springboot_demo.controllers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,8 +17,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.example.springboot_demo.domain.Message;
+import com.example.springboot_demo.domain.User;
 import com.example.springboot_demo.repositories.MessageRepository;
 import com.example.springboot_demo.repositories.UserRepository;
+import com.example.springboot_demo.services.UserService;
 
 @Controller
 public class HelloController {

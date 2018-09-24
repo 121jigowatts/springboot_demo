@@ -1,4 +1,4 @@
-package com.example.springboot_demo;
+package com.example.springboot_demo.services;
 
 import java.util.List;
 
@@ -9,6 +9,8 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
 import org.springframework.stereotype.Service;
+
+import com.example.springboot_demo.domain.User;
 
 @Service
 public class UserService {

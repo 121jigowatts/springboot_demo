@@ -10,7 +10,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.example.springboot_demo.User;
+import com.example.springboot_demo.domain.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
