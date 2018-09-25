@@ -6,6 +6,28 @@
 </head>
 <body>
   <h1>Home</h1>
+   <div>
+    <form method="post" action="/">
+      <textarea name="text" rows="1"></textarea>
+      <input type="submit" />
+    </form>
+  </div>
+  <div>
+    <table>
+      <tr>
+        <th>TEXT</th>
+        <th>DATE</th>
+      </tr>
+      <tr th:each="mes : ${messages}">
+        <td th:text="${mes.text}"></td>
+        <td th:text="${mes.date}"></td>
+      </tr>
+    </table>
+  </div>
 
+  <footer>
+    <hr />
+    <label class="postedby">Posted by 1.21jigowatts</label>
+  </footer>
 </body>
 </html>
