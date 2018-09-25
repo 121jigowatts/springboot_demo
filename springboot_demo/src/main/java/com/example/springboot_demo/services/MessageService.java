@@ -17,6 +17,10 @@ public class MessageService {
 		return repository.findAll();
 	}
 
+	public List<Message> findTop3ByOrderByDateDesc() {
+		return repository.findTop3ByOrderByDateDesc();
+	}
+
 	public void save(Message message) {
 		repository.save(message);
 	}

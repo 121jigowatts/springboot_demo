@@ -20,7 +20,7 @@ public class HomeController {
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
 	public ModelAndView index(ModelAndView mav) {
 		mav.setViewName("/home/index");
-		Iterable<Message> messages = service.getAll();
+		Iterable<Message> messages = service.findTop3ByOrderByDateDesc();
 		mav.addObject("messages", messages);
 		return mav;
 	}
