@@ -6,6 +6,8 @@ import javax.persistence.EntityManager;
 
 import org.springframework.stereotype.Repository;
 
+import com.example.springboot_demo.domain.Task;
+
 @Repository
 public class TaskDaoImpl implements TaskDao<Task> {
 	private static final long serialVersionUID = 1L;

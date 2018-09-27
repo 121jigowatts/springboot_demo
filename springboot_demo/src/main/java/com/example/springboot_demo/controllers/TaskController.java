@@ -1,4 +1,4 @@
-package com.example.springboot_demo;
+package com.example.springboot_demo.controllers;
 
 import java.util.List;
 
@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.example.springboot_demo.TaskDaoImpl;
+import com.example.springboot_demo.domain.Task;
 import com.example.springboot_demo.repositories.TaskRepository;
 
 @Controller

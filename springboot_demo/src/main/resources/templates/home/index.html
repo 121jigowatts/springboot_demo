@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" media="all" th:href="@{/css/style.css}" />
-<title>User</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>home</title>
 </head>
 <body>
-  <h1>Home Page</h1>
-  <p th:text="${message}"></p>
-  <div>
+  <h1>Home</h1>
+   <div>
     <form method="post" action="/home">
       <textarea name="text" rows="1"></textarea>
       <input type="submit" />
