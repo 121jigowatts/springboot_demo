@@ -2,9 +2,9 @@ package com.example.springboot_demo.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -27,8 +27,7 @@ public class HomeController {
 
 	@RequestMapping(value = "/home", method = RequestMethod.POST)
 	@Transactional(readOnly = false)
-	public ModelAndView form(@RequestParam("text") String text, ModelAndView model) {
-		Message message = new Message(text);
+	public ModelAndView form(@ModelAttribute("formModel") Message message, ModelAndView model) {
 		service.save(message);
 		return new ModelAndView("redirect:/home/");
 	}

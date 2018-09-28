@@ -3,28 +3,43 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>home</title>
+<style>
+.content {
+	margin: 20px;
+}
+
+.message {
+	background: #f0f0f0;
+	margin-bottom: 20px;
+}
+
+.date {
+	padding: 5px;
+}
+
+.text {
+	padding: 10px;
+}
+
+.postedby {
+	font-size: xx-small;
+}
+</style>
 </head>
 <body>
   <h1>Home</h1>
-   <div>
-    <form method="post" action="/home">
-      <textarea name="text" rows="1"></textarea>
-      <input type="submit" />
-    </form>
+  <div class="content">
+    <div class="message" th:each="obj:${messages}">
+      <div class="date" th:text="${obj.getStringDate()}"></div>
+      <div class="text" th:text="${obj.text}"></div>
+    </div>
+    <div>
+      <form method="post" action="/home" th:object="${formModel}">
+        <textarea name="text" rows="1"></textarea>
+        <input type="submit" />
+      </form>
+    </div>
   </div>
-  <div>
-    <table>
-      <tr>
-        <th>TEXT</th>
-        <th>DATE</th>
-      </tr>
-      <tr th:each="mes : ${messages}">
-        <td th:text="${mes.text}"></td>
-        <td th:text="${mes.date}"></td>
-      </tr>
-    </table>
-  </div>
-
   <footer>
     <hr />
     <label class="postedby">Posted by 1.21jigowatts</label>

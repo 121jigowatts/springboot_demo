@@ -1,5 +1,6 @@
 package com.example.springboot_demo.domain;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.springframework.data.annotation.Id;
@@ -27,6 +28,10 @@ public class Message {
 
 	public Date getDate() {
 		return this.date;
+	}
+
+	public String getStringDate() {
+		return new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(this.date);
 	}
 
 }
