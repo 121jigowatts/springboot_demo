@@ -30,10 +30,10 @@ public class HelloController {
 
 	@Autowired
 	private UserService service;
-	
+
 	@Autowired
 	MessageRepository repo;
-	
+
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView index(ModelAndView model) {
 		model.setViewName("index");
@@ -45,8 +45,8 @@ public class HelloController {
 
 	@RequestMapping(value = "/", method = RequestMethod.POST)
 	@Transactional(readOnly = false)
-	public ModelAndView form(@RequestParam("text") String text,ModelAndView model) {
-		Message message = new Message(text);
+	public ModelAndView form(@ModelAttribute("formModel") Message message, ModelAndView model) {
+		// Message message = new Message(text);
 		repo.save(message);
 		return new ModelAndView("redirect:/");
 	}
