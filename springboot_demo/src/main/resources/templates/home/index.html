@@ -34,7 +34,7 @@
       <div class="text" th:text="${obj.text}"></div>
     </div>
     <div>
-      <form method="post" action="/home">
+      <form method="post" action="/home" th:object="${formModel}">
         <textarea name="text" rows="1"></textarea>
         <input type="submit" />
       </form>

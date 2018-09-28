@@ -46,7 +46,6 @@ public class HelloController {
 	@RequestMapping(value = "/", method = RequestMethod.POST)
 	@Transactional(readOnly = false)
 	public ModelAndView form(@ModelAttribute("formModel") Message message, ModelAndView model) {
-		// Message message = new Message(text);
 		repo.save(message);
 		return new ModelAndView("redirect:/");
 	}
