@@ -1,6 +1,5 @@
 package com.example.springboot_demo.controllers;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -83,7 +82,7 @@ public class HelloController {
 	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
 	public ModelAndView edit(@ModelAttribute User userEntity, @PathVariable int id, ModelAndView model) {
 		model.setViewName("edit");
-		Optional<User> user = repository.findById((long) id);
+		Optional<User> user = repository.findById(String.valueOf(id));
 		model.addObject("formModel", user.get());
 		return model;
 	}
@@ -91,34 +90,27 @@ public class HelloController {
 	@RequestMapping(value = "/edit", method = RequestMethod.POST)
 	@Transactional(readOnly = false)
 	public ModelAndView update(@ModelAttribute User userEntity, ModelAndView model) {
-		repository.saveAndFlush(userEntity);
+		repository.save(userEntity);
 		return new ModelAndView("redirect:/");
 	}
 
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
 	public ModelAndView delete(@PathVariable int id, ModelAndView model) {
 		model.setViewName("delete");
-		Optional<User> user = repository.findById((long) id);
+		Optional<User> user = repository.findById(String.valueOf(id));
 		model.addObject("formModel", user.get());
 		return model;
 	}
 
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
 	@Transactional(readOnly = false)
-	public ModelAndView remove(@RequestParam long id, ModelAndView model) {
+	public ModelAndView remove(@RequestParam String id, ModelAndView model) {
 		repository.deleteById(id);
 		return new ModelAndView("redirect:/");
 	}
 
 	@PostConstruct
 	public void initalData() {
-		ArrayList<User> data = new ArrayList<User>();
-		data.add(new User("Alice", "Alice@example.com", 16));
-		data.add(new User("Emma", "Emma@example.com", 19));
-		data.add(new User("Olivia", "Olivia@example.com", 17));
 
-		for (User user : data) {
-			repository.saveAndFlush(user);
-		}
 	}
 }
