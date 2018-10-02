@@ -7,31 +7,30 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
+
 import com.example.springboot_demo.services.AccountService;
 
 @Configuration
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
-
+	
 	@Autowired
 	AccountService service;
 
 	@Bean
-	public PasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
+	public BCryptPasswordEncoder passwordEncoder() {
+		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+		return bCryptPasswordEncoder;
 	}
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-//		http.authorizeRequests().antMatchers("/login").permitAll().anyRequest().authenticated().and().formLogin()
-//				.loginPage("/login").failureUrl("/login?error=true").usernameParameter("name")
-//				.passwordParameter("password").and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-//				.logoutSuccessUrl("/").and().exceptionHandling();
-		http.authorizeRequests()
-        .antMatchers("/login").permitAll()
-        .anyRequest().authenticated()
-        .and()
-        .formLogin().loginPage("/login");
+		// http.authorizeRequests().antMatchers("/login").permitAll().anyRequest().authenticated().and().formLogin()
+		// .loginPage("/login").failureUrl("/login?error=true").usernameParameter("name")
+		// .passwordParameter("password").and().logout().logoutRequestMatcher(new
+		// AntPathRequestMatcher("/logout"))
+		// .logoutSuccessUrl("/").and().exceptionHandling();
+		http.authorizeRequests().antMatchers("/login").permitAll().antMatchers("/signup").permitAll().anyRequest()
+				.authenticated().and().formLogin().loginPage("/login");
 	}
 
 	@Override
