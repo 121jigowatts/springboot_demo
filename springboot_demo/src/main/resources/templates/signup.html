@@ -7,20 +7,20 @@
 <body>
   <h1>Sign Up</h1>
   <div>
-    <form action="/signup" method="post">
+    <form action="/signup" method="post" th:object="${formModel}">
       <div>
         <div th:if="${param.error}">Invalid name and password.</div>
         <div th:if="${param.logout}">You have been logged out.</div>
       </div>
       <div>
-        <input type="text" name="username" placeholder="Name" />
+        <input type="text" name="name" placeholder="Name" />
       </div>
       <div>
         <input type="password" name="password" placeholder="Password" />
       </div>
       <div>
-        <input type="submit" value="Sign up" /> <input type="hidden"
-          th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+        <input type="submit" value="Sign up" /> 
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
       </div>
     </form>
     <form action="/login" method="get">
