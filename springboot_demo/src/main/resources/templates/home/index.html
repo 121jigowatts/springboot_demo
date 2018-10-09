@@ -2,38 +2,12 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" media="all" th:href="@{/css/style.css}" />
 <title>home</title>
-<style>
-.content {
-	margin: 20px;
-}
-
-.message {
-	background: #f0f0f0;
-	margin-bottom: 20px;
-}
-
-.date {
-	padding: 5px;
-}
-
-.text {
-	padding: 10px;
-}
-
-.postedby {
-	font-size: xx-small;
-}
-</style>
 </head>
 <body>
+  <div th:replace="header :: menu"></div>
   <h1>Home</h1>
-  <div>
-    <form action="/logout" method="post">
-      <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-      <button type="submit">Logout</button>
-    </form>
-  </div>
   <div class="content">
     <div class="message" th:each="obj:${messages}">
       <div class="date" th:text="${obj.getStringDate()}"></div>
@@ -46,9 +20,6 @@
       </form>
     </div>
   </div>
-  <footer>
-    <hr />
-    <label class="postedby">Posted by 1.21jigowatts</label>
-  </footer>
+  <div th:replace="footer :: postedby"></div>
 </body>
 </html>
