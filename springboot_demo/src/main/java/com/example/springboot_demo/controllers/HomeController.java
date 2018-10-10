@@ -22,7 +22,7 @@ public class HomeController {
 	@Autowired
 	private MessageService service;
 
-	@RequestMapping(value = "/home", method = RequestMethod.GET)
+	@RequestMapping(value = { "/", "/home" }, method = RequestMethod.GET)
 	public ModelAndView index(ModelAndView mav) {
 		mav.setViewName("/home/index");
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
