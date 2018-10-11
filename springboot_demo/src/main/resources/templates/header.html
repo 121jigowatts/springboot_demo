@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+  <header th:fragment="menu">
+    <span>Sand box</span>
+    <div class="profile" th:if="${currentUser == null}">
+      <a th:href="@{/login}">Log in</a>
+    </div>
+    <div class="profile" th:if="${currentUser}">
+      <a th:text="${fullName}"></a>
+    </div>
+    <div class="profile">
+      <form action="/logout" method="post">
+        <input type="hidden" th:name="${_csrf.parameterName}"
+          th:value="${_csrf.token}" />
+        <button type="submit">Logout</button>
+      </form>
+    </div>
+  </header>
+
+</body>
+</html>

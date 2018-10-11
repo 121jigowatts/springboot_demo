@@ -5,26 +5,25 @@ html {
 	margin-right: 5%;
 }
 
-body {
-	color: gray;
-	background: #292929
+.profile {
+	text-align: right;
 }
 
-th {
-	color: #292929;
+.content {
+	margin: 20px;
+}
+
+.message {
 	background: #f0f0f0;
-}
-
-td {
-	color: gray;
-}
-
-.error {
-	color: red;
-}
-
-.content1 {
 	margin-bottom: 20px;
+}
+
+.date {
+	padding: 5px;
+}
+
+.text {
+	padding: 10px;
 }
 
 .postedby {
