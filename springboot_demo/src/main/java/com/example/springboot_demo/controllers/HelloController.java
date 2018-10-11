@@ -33,7 +33,7 @@ public class HelloController {
 	@Autowired
 	MessageRepository repo;
 
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = "/test", method = RequestMethod.GET)
 	public ModelAndView index(ModelAndView model) {
 		model.setViewName("index");
 		model.addObject("message", "From MongoDB");
@@ -42,7 +42,7 @@ public class HelloController {
 		return model;
 	}
 
-	@RequestMapping(value = "/", method = RequestMethod.POST)
+	@RequestMapping(value = "/test", method = RequestMethod.POST)
 	@Transactional(readOnly = false)
 	public ModelAndView form(@ModelAttribute("formModel") Message message, ModelAndView model) {
 		repo.save(message);

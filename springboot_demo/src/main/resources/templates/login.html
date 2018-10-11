@@ -6,6 +6,7 @@
 </head>
 <body>
   <h1>Login</h1>
+  <p th:text="${successMessage}"></p>
   <div>
     <form action="/login" method="post">
       <div>
@@ -27,9 +28,6 @@
       <input type="submit" value="signup" />
     </form>
   </div>
-  <footer>
-    <hr />
-    <label class="postedby">Posted by 1.21jigowatts</label>
-  </footer>
+  <div th:replace="footer :: postedby"></div>
 </body>
 </html>
