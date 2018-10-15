@@ -34,7 +34,7 @@ public class ProfileController {
 		
 		service.saveUser(user);
 		
-		return new ModelAndView("redirect:/home/profile");
+		return new ModelAndView("redirect:/home");
 	}
 
 }
