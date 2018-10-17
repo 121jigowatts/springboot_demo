@@ -9,7 +9,7 @@
     </div>
     <div class="profile" th:if="${currentUser}">
       <a href="profile.html"
-        th:href="@{/home/profile(id=${currentUser.id})}"
+        th:href="@{/home/profile}"
         th:text="${fullName}"></a>
     </div>
     <div class="profile">
