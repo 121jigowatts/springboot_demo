@@ -8,7 +8,9 @@
       <a th:href="@{/login}">Log in</a>
     </div>
     <div class="profile" th:if="${currentUser}">
-      <a th:text="${fullName}"></a>
+      <a href="profile.html"
+        th:href="@{/home/profile}"
+        th:text="${fullName}"></a>
     </div>
     <div class="profile">
       <form action="/logout" method="post">
