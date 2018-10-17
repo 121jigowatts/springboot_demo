@@ -26,6 +26,11 @@ html {
 	padding: 10px;
 }
 
+.taskbar {
+	padding: 5px;
+	text-align: right;
+}
+
 .postedby {
 	font-size: xx-small;
 }
