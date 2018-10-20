@@ -12,12 +12,15 @@
     <div class="message" th:each="obj:${messages}">
       <div class="date" th:text="${obj.getStringDate()}"></div>
       <div class="text" th:text="${obj.text}"></div>
+      <div class="taskbar">
+        <a th:href="@{'/message/edit/' + ${obj.id}}">edit</a>
+      </div>
     </div>
     <div>
       <form method="post" action="/home" th:object="${formModel}">
         <textarea name="text" rows="1"></textarea>
-        <input type="submit" />
-        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+        <input type="submit" /> <input type="hidden"
+          th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
       </form>
     </div>
   </div>
