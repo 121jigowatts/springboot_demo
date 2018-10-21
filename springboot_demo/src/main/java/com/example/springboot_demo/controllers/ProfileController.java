@@ -24,6 +24,7 @@ public class ProfileController {
 		mav.setViewName("/home/profile");
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = service.findUserByName(auth.getName());
+		user.setPassword("");
 		mav.addObject("currentUser", user);
 		mav.addObject("fullName", "Welcome " + user.getName());
 		mav.addObject("formModel", user);
