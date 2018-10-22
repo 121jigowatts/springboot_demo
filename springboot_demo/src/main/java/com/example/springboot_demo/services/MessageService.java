@@ -29,4 +29,7 @@ public class MessageService {
 		repository.save(message);
 	}
 
+	public void deleteById(String id) {
+		repository.deleteById(id);
+	}
 }

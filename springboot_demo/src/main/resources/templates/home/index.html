@@ -14,6 +14,7 @@
       <div class="text" th:text="${obj.text}"></div>
       <div class="taskbar">
         <a th:href="@{'/message/edit/' + ${obj.id}}">edit</a>
+        <a th:href="@{'/message/delete/' + ${obj.id}}">delete</a>
       </div>
     </div>
     <div>
