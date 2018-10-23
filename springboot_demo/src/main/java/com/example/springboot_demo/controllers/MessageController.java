@@ -48,7 +48,7 @@ public class MessageController {
 
 	@RequestMapping(value = "/message/delete/{id}", method = RequestMethod.GET)
 	public ModelAndView delete(@PathVariable String id, ModelAndView mav) {
-		mav.setViewName("/message/edit");
+		mav.setViewName("/message/delete");
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = accountService.findUserByName(auth.getName());
 		mav.addObject("currentUser", user);

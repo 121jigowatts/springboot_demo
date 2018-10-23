@@ -26,6 +26,16 @@ html {
 	padding: 10px;
 }
 
+.frame {
+	border: solid 2px #cacaca;
+	border-radius: 1em;
+	padding: 10px;
+}
+
+.target {
+	padding: 10px;
+}
+
 .taskbar {
 	padding: 5px;
 	text-align: right;
