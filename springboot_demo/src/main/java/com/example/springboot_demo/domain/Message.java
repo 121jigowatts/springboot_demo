@@ -46,6 +46,9 @@ public class Message {
 	}
 
 	public String getStringDate() {
+		if (this.date == null) {
+			return "";
+		}
 		return new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(this.date);
 	}
 
