@@ -10,7 +10,8 @@
   <h1>Edit Page</h1>
   <div class="content">
     <form method="post" action="/message/edit" th:object="${formModel}">
-      <input type="hidden" name="id" th:value="*{id}" />
+      <input type="hidden" name="user" th:value="${currentUser.id}" />
+      <input type="hidden" name="id" th:value="*{id}" /> 
       <input type="hidden" name="date" th:value="*{getStringDate()}" />
       <div>
         <textarea class="text" name="text" th:field="*{text}"></textarea>
