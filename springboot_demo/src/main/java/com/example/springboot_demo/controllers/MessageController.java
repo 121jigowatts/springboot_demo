@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -42,6 +43,26 @@ public class MessageController {
 	@Transactional(readOnly = false)
 	public ModelAndView update(@ModelAttribute("formModel") Message message, ModelAndView model) {
 		messageService.save(message);
+		return new ModelAndView("redirect:/home/");
+	}
+
+	@RequestMapping(value = "/message/delete/{id}", method = RequestMethod.GET)
+	public ModelAndView delete(@PathVariable String id, ModelAndView mav) {
+		mav.setViewName("/message/delete");
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = accountService.findUserByName(auth.getName());
+		mav.addObject("currentUser", user);
+		mav.addObject("fullName", "Welcome " + user.getName());
+
+		Optional<Message> messages = messageService.findById(id);
+		mav.addObject("formModel", messages.get());
+		return mav;
+	}
+
+	@RequestMapping(value = "/message/delete", method = RequestMethod.POST)
+	@Transactional(readOnly = false)
+	public ModelAndView remove(@RequestParam String id, ModelAndView model) {
+		messageService.deleteById(id);
 		return new ModelAndView("redirect:/home/");
 	}
 }

@@ -14,8 +14,14 @@ html {
 }
 
 .message {
-	background: #f0f0f0;
+	border: solid 2px #cacaca;
+	border-radius: 1em;
+	padding: 10px;
 	margin-bottom: 20px;
+}
+
+.input_message {
+	width: 100%
 }
 
 .date {
@@ -23,6 +29,17 @@ html {
 }
 
 .text {
+	padding: 10px;
+}
+
+.frame {
+	border: solid 2px #cacaca;
+	border-radius: 1em;
+	padding: 10px;
+	margin-bottom: 10px;
+}
+
+.target {
 	padding: 10px;
 }
 

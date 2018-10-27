@@ -4,6 +4,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.persistence.ManyToOne;
+
 import org.springframework.data.annotation.Id;
 
 public class Message {
@@ -12,6 +14,20 @@ public class Message {
 
 	private String text;
 	private Date date;
+
+	@ManyToOne
+	private User user;
+
+	public User getUser() {
+		if (this.user == null) {
+			return new User();
+		}
+		return this.user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
 
 	public String getId() {
 		return this.id;
@@ -46,6 +62,9 @@ public class Message {
 	}
 
 	public String getStringDate() {
+		if (this.date == null) {
+			return "";
+		}
 		return new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(this.date);
 	}
 

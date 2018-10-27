@@ -1,6 +1,10 @@
 package com.example.springboot_demo.domain;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 public class User {
 	@Id
@@ -13,6 +17,17 @@ public class User {
 	private String mail;
 
 	private Integer age;
+
+	@OneToMany(cascade=CascadeType.ALL)
+	private List<Message> messages;
+
+	public List<Message> getMessages() {
+		return this.messages;
+	}
+
+	public void setMessages(List<Message> messages) {
+		this.messages = messages;
+	}
 
 	public User() {
 
