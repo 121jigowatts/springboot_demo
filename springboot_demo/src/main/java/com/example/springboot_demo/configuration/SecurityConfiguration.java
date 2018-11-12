@@ -29,7 +29,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		// .passwordParameter("password").and().logout().logoutRequestMatcher(new
 		// AntPathRequestMatcher("/logout"))
 		// .logoutSuccessUrl("/").and().exceptionHandling();
-		http.authorizeRequests().antMatchers("/login","/signup","/api/user/**").permitAll().anyRequest()
+		http.authorizeRequests().antMatchers("/login","/signup","/api/**").permitAll().anyRequest()
 				.authenticated().and().formLogin().loginPage("/login");
 	}
 
